@@ -1,4 +1,7 @@
 import { Switch, Route } from "react-router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { AdminPage, LoginPage, HomePage, Error404Page } from "./pages";
 
 function App() {
@@ -20,6 +23,7 @@ function App() {
         <Route path="/admin" component={AdminPage} />
         <Route path="/" component={Error404Page} />
       </Switch>
+      <ToastContainer />
     </div>
   );
 }

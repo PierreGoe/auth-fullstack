@@ -1,11 +1,12 @@
 const express = require("express");
 const { backPort } = require("./conf");
 const passport = require("passport");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
 app.use(passport.initialize());
-
+app.use(cors());
 /* --------------------------------------------------------------------- Routes */
 
 app.use("/auth", require("./routes/auth"));

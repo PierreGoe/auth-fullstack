@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { api, cookies } from "../conf";
 
 export function LoginPage() {
   const [form, setForm] = useState({
     haveAccount: false,
-    mail: null,
-    firstname: null,
-    lastname: null,
-    password: null,
-    passwordBis: null,
+    mail: "",
+    firstname: "",
+    lastname: "",
+    password: "",
+    passwordBis: "",
   });
 
   const handleChange = (e) => {
@@ -20,7 +22,25 @@ export function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    const { mail, password, firstname, lastname } = form;
+    let url, formData;
+    if (form.haveAccount) {
+      url = "/auth/login";
+      formData = { mail, password };
+    } else {
+      url = "/auth/signup";
+      formData = { mail, password, firstname, lastname };
+    }
+    api
+      .post(url, formData)
+      .then(({ data }) => {
+        cookies.set("token", data);
+        api.defaults.headers.authorization = "Bearer " + data;
+        toast("You're now logged in <3");
+      })
+      .catch((e) => {
+        toast.error("Achtung!" + e);
+      });
   };
 
   return (
