@@ -14,7 +14,7 @@ router.post("/signup", async (req, res) => {
     delete formData.password;
     formData.id = sqlRes.insertId;
     const token = jwt.sign(formData, jwt_secret);
-    res.status(201).json(token);
+    res.status(201).json({ user: formData, token });
   } catch (e) {
     console.log(e);
     res.status(500).json(e);
@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   const token = jwt.sign(req.user, jwt_secret);
-  res.status(200).json(token);
+  res.status(200).json({ user: req.user, token });
 });
 
 module.exports = router;

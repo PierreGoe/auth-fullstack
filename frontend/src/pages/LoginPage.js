@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { api, cookies } from "../conf";
 
@@ -11,6 +12,7 @@ export function LoginPage() {
     password: "",
     passwordBis: "",
   });
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -34,9 +36,11 @@ export function LoginPage() {
     api
       .post(url, formData)
       .then(({ data }) => {
-        cookies.set("token", data);
-        api.defaults.headers.authorization = "Bearer " + data;
-        toast("You're now logged in <3");
+        const { token, user } = data;
+        cookies.set("token", token);
+        api.defaults.headers.authorization = "Bearer " + token;
+        dispatch({ type: "LOGIN", user });
+        toast(`You're now logged in, ${user.firstname} <3`);
       })
       .catch((e) => {
         toast.error("Achtung!" + e);
