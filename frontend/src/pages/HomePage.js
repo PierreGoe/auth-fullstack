@@ -15,9 +15,9 @@ export function HomePage() {
           Todo: "Protected" admin route (no link available and auto-redirection
           to Home for anonymous users)
         </li>
-        <li>Todo: Add links in the main menu</li>
+        <li>Done: Add links in the main menu</li>
+        <li>Done: Logout</li>
         <li>Todo: Add styles</li>
-        <li>Todo: Logout</li>
       </ul>
     </>
   );
