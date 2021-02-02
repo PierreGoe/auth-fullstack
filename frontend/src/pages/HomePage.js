@@ -12,8 +12,8 @@ export function HomePage() {
         </li>
         <li>Done: User data storage in Redux</li>
         <li>
-          Todo: "Protected" admin route (no link available and auto-redirection to Home for
-          anonymous users)
+          Todo: "Protected" admin route (no link available and auto-redirection
+          to Home for anonymous users)
         </li>
         <li>Todo: Add links in the main menu</li>
         <li>Todo: Add styles</li>
